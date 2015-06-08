@@ -3,10 +3,13 @@ package tags;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import command.ServiceLogoutPage;
 import model.entities.Role;
 import model.entities.User;
 import constants.CustomConstants;
@@ -28,7 +31,8 @@ public class CheckAuthorizationTag extends TagSupport {
 		     }else{
 		    	 User currUser = (User) session.getAttribute(CustomConstants.USER_ATTR);
 		    	 if( currUser == null || currUser.getRole()!=role){
-		    		 pageContext.forward(CustomConstants.LOG_IN_PAGE);
+		    		 new ServiceLogoutPage().executePage(
+		    				 (HttpServletRequest)pageContext.getRequest(), (HttpServletResponse)pageContext.getResponse());
 		    	 }
 		     }
 		} catch (IOException | ServletException e) {

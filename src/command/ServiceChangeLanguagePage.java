@@ -32,7 +32,7 @@ public class ServiceChangeLanguagePage implements ServicePageCommand {
 			dictionary.put(key, locale.getString(key));
 		}
 		request.getServletContext().setAttribute(CustomConstants.DICTIONARY_ATTR, dictionary);
-		request.getRequestDispatcher(CustomConstants.WELCOME_PAGE).forward(request, response);
+		request.getRequestDispatcher(request.getParameter(CustomConstants.CURRENT_PAGE)).forward(request, response);
 	}
 
 }

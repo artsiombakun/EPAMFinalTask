@@ -21,6 +21,7 @@
 				<li>
 					<form method="post" action="controller">
 						<input type="hidden" name="command" value="change-lang-command">
+						<input type="hidden" name="current-page" value="/welcome.jsp">
 						<button class="btn btn-success">${dictionary["LANGUAGE"]}</button>
 					</form>
 				</li>

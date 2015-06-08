@@ -33,7 +33,8 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -53,6 +54,14 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<form method="get" action="controller">
+				<input type="hidden" name="command"
+					value="client-list-pagination-command">
+				<ul class="pager">
+					<li class="previous"><button class="btn btn-info" name="cl-l-page" value="prev">&larr;</button></li>
+					<li class="next"><button class="btn btn-info" name="cl-l-page" value="next">&rarr;</button></li>
+				</ul>
+			</form>
 		</div>
-</div>
+	</div>
 </html>

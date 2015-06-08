@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 
 import constants.CustomConstants;
 
-public class CheckFullFieldsFilter implements Filter{
+public class CheckFullFieldsFilter implements Filter {
 
 	@Override
 	public void destroy() {
@@ -18,29 +18,28 @@ public class CheckFullFieldsFilter implements Filter{
 			FilterChain fchain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		//String contextPath = req.getContextPath();
 		String errmsg = "";
-		if(CustomConstants.SIGN_UP_COMMAND.equals(req.getParameter(CustomConstants.COMMAND_TYPE_PARAM))){
-			if(req.getParameter(CustomConstants.FIRSTNAME_PARAM).isEmpty())
-				errmsg+="Input first name! ";
-			if(req.getParameter(CustomConstants.LASTNAME_PARAM).isEmpty())
-				errmsg+="Input last name! ";
-			if(req.getParameter(CustomConstants.LOGIN_PARAM).isEmpty())
-				errmsg+="Input login! ";
-			if(req.getParameter(CustomConstants.PASSWORD_PARAM).isEmpty())
-				errmsg+="Input password! ";
-			if(req.getParameter(CustomConstants.CONFIRM_PASSWORD_PARAM).isEmpty())
-				errmsg+="Input confirm password!";
+		if (CustomConstants.SIGN_UP_COMMAND.equals(req
+				.getParameter(CustomConstants.COMMAND_TYPE_PARAM))) {
+			if (req.getParameter(CustomConstants.FIRSTNAME_PARAM).isEmpty())
+				errmsg += "Input first name! ";
+			if (req.getParameter(CustomConstants.LASTNAME_PARAM).isEmpty())
+				errmsg += "Input last name! ";
+			if (req.getParameter(CustomConstants.LOGIN_PARAM).isEmpty())
+				errmsg += "Input login! ";
+			if (req.getParameter(CustomConstants.PASSWORD_PARAM).isEmpty())
+				errmsg += "Input password! ";
+			if (req.getParameter(CustomConstants.CONFIRM_PASSWORD_PARAM)
+					.isEmpty())
+				errmsg += "Input confirm password!";
 		}
-		if(errmsg.isEmpty())
-		{
+
+		if (errmsg.isEmpty()) {
 			fchain.doFilter(request, response);
-		}
-		else
-		{
+		} else {
 			req.setAttribute(CustomConstants.ERROR_ATTR, errmsg);
-			req.getRequestDispatcher(CustomConstants.SIGN_UP_PAGE).forward(req, resp);
-			//resp.sendRedirect(contextPath + "/log.jsp");
+			req.getRequestDispatcher(CustomConstants.SIGN_UP_PAGE).forward(req,
+					resp);
 		}
 
 	}

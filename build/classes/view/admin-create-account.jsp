@@ -42,7 +42,7 @@
 			<br>
 			<form method="get" action="controller">
 				<input type="hidden" name="command" value="create-account-command">
-				<span style="color: red">${errmsg}</span> <span>${dictionary["INPUT_ID_OF_CLIENT"]}</span>
+				<span>${dictionary["INPUT_ID_OF_CLIENT"]}</span>
 				<input type="text" name="clID"><br><br>
 				<button>${dictionary["CREATE_ACCOUNT"]}</button>
 			</form>

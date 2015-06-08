@@ -41,6 +41,7 @@ public class CustomConstants {
 	public static final String USER_ATTR = "user";
 	public static final String BLOCKED_ACCOUNTS_LIST_ATTR = "blockedAccs";
 	public static final String DICTIONARY_ATTR = "dictionary";
+	public static final String CURRENT_PAGE = "current-page";
 	
 	//parameters of requests
 	public static final String ID_PARAM = "clID";

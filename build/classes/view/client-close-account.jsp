@@ -42,9 +42,9 @@
 					${errmsg}
 				</div>
 			</c:if>
-			<br> <br>
+			<br/> <br/>
 			<form method="post" action="controller">
-				<input type="hidden" name="command" value="close-account-command">
+				<input type="hidden" name="command" value="close-account-command"/>
 				<div class="row">
 					<div class="col-sm-5">
 						<span>${dictionary["CLOSE_ACCOUNT"]}</span>

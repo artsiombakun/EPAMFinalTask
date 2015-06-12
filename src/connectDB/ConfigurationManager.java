@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import constants.CustomConstants;
+import util.Config;
 /**
  * get driver, url, login and password using any source, such as .properties file
  * </p>Singleton
@@ -22,9 +22,9 @@ public class ConfigurationManager {
 		info = new Properties();
 		try {
 			info.load(new InputStreamReader(new FileInputStream(
-					this.getClass().getResource("/").getPath()+ CustomConstants.DB_CONFIG_FILE_ADDRESS),"UTF-8"));
+					this.getClass().getResource("/").getPath()+ Config.DB_CONFIG_FILE_ADDRESS),"UTF-8"));
 		} catch (IOException e) {
-			theLogger.error(CustomConstants.CAN_NOT_LOAD_DB_CONFIG_FILE, e);
+			theLogger.error(Config.CAN_NOT_LOAD_DB_CONFIG_FILE, e);
 		}
 	}
 	/**
@@ -37,16 +37,16 @@ public class ConfigurationManager {
 		return instance;
 	}
 	public String getDriverName() {
-		return info.getProperty(CustomConstants.DRIVER_TAG);
+		return info.getProperty(Config.DRIVER_TAG);
 	}
 	public String getURL() {
-		return info.getProperty(CustomConstants.URL_TAG);
+		return info.getProperty(Config.URL_TAG);
 	}
 	public String getLogin() {
-		return info.getProperty(CustomConstants.LOGIN_TAG);
+		return info.getProperty(Config.LOGIN_TAG);
 	}
 	public String getPassword() {
-		return info.getProperty(CustomConstants.PASSWORD_TAG);
+		return info.getProperty(Config.PASSWORD_TAG);
 	}
 	
 }

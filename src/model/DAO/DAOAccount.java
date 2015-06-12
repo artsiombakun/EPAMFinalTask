@@ -3,10 +3,11 @@ package model.DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import util.Config;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import constants.CustomConstants;
 import exceptions.DAOException;
 import exceptions.JDBCConnectionException;
 
@@ -77,18 +78,17 @@ public class DAOAccount extends DAO{
 					}
 				}
 		} catch (JDBCConnectionException e) {
-			throw new DAOException(CustomConstants.CONN_UNAVAILABLE, e);
+			throw new DAOException(Config.CONN_UNAVAILABLE, e);
 		} catch (SQLException e) {
-			throw new DAOException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new DAOException(Config.CAN_NOT_CONNECT, e);
 		} finally {
 			try {
 				conn.setAutoCommit(true);
 				psCrCard.close();
 				psCrAcc.close();
-				conn.close();
 				cnr.returnConnection(conn);
 			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(CustomConstants.CAN_NOT_CLOSE, e);
+				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
 		return rez;
@@ -140,9 +140,9 @@ public class DAOAccount extends DAO{
 					rez = false;
 			}
 		} catch (JDBCConnectionException e) {
-			throw new DAOException(CustomConstants.CONN_UNAVAILABLE, e);
+			throw new DAOException(Config.CONN_UNAVAILABLE, e);
 		} catch (SQLException e) {
-			throw new DAOException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new DAOException(Config.CAN_NOT_CONNECT, e);
 		} finally {
 			try {
 				conn.setAutoCommit(true);
@@ -150,10 +150,9 @@ public class DAOAccount extends DAO{
 				psFrom.close();
 				psTo.close();
 				psNote.close();
-				conn.close();
 				cnr.returnConnection(conn);
 			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(CustomConstants.CAN_NOT_CLOSE, e);
+				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
 		return rez;
@@ -191,18 +190,17 @@ public class DAOAccount extends DAO{
 			}else
 				rez = false;
 		} catch (JDBCConnectionException e) {
-			throw new DAOException(CustomConstants.CONN_UNAVAILABLE, e);
+			throw new DAOException(Config.CONN_UNAVAILABLE, e);
 		} catch (SQLException e) {
-			throw new DAOException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new DAOException(Config.CAN_NOT_CONNECT, e);
 		} finally {
 			try {
 				conn.setAutoCommit(true);
 				psBalance.close();
 				psClose.close();
-				conn.close();
 				cnr.returnConnection(conn);
 			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(CustomConstants.CAN_NOT_CLOSE, e);
+				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
 		return rez;
@@ -233,18 +231,16 @@ public class DAOAccount extends DAO{
 			}else
 				rez = false;
 		} catch (JDBCConnectionException e) {
-			throw new DAOException(CustomConstants.CONN_UNAVAILABLE, e);
+			throw new DAOException(Config.CONN_UNAVAILABLE, e);
 		} catch (SQLException e) {
-			throw new DAOException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new DAOException(Config.CAN_NOT_CONNECT, e);
 		}  finally {
 			try {
 				conn.setAutoCommit(true);
 				psBlock.close();
-				conn.close();
-				//cnr.close();
 				cnr.returnConnection(conn);
 			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(CustomConstants.CAN_NOT_CLOSE, e);
+				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
 		return rez;
@@ -275,17 +271,16 @@ public class DAOAccount extends DAO{
 			}else
 				rez = false;
 		} catch (JDBCConnectionException e) {
-			throw new DAOException(CustomConstants.CONN_UNAVAILABLE, e);
+			throw new DAOException(Config.CONN_UNAVAILABLE, e);
 		} catch (SQLException e) {
-			throw new DAOException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new DAOException(Config.CAN_NOT_CONNECT, e);
 		}  finally {
 			try {
 				conn.setAutoCommit(true);
 				psBlock.close();
-				conn.close();
 				cnr.returnConnection(conn);
 			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(CustomConstants.CAN_NOT_CLOSE, e);
+				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
 		return rez;
@@ -317,14 +312,13 @@ public class DAOAccount extends DAO{
 				}else
 					rez = false;
 		} catch (JDBCConnectionException | SQLException e) {
-			throw new DAOException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new DAOException(Config.CAN_NOT_CONNECT, e);
 		} finally {
 			try {
 				psTo.close();
-				conn.close();
 				cnr.returnConnection(conn);
 			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(CustomConstants.CAN_NOT_CLOSE, e);
+				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
 		return rez;

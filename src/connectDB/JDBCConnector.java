@@ -8,9 +8,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
+
+import util.Config;
+
 import com.mysql.jdbc.Connection;
 
-import constants.CustomConstants;
 import exceptions.JDBCConnectionException;
 /**
  * Get connection to DB, using data from source
@@ -19,7 +22,9 @@ public class JDBCConnector {
 	/**
 	 * Pool of connections to DB
 	 * */
-	private BlockingQueue<Connection> pool;
+	private static BlockingQueue<Connection> pool;
+	
+	private static Logger theLogger = Logger.getLogger(JDBCConnector.class);
 	
 	private synchronized void initJDBCConnector() throws JDBCConnectionException {
 		pool = new LinkedBlockingQueue<Connection>();
@@ -27,9 +32,9 @@ public class JDBCConnector {
 		try {
 			Class.forName(cfg.getDriverName());
 		} catch (ClassNotFoundException e) {
-			throw new JDBCConnectionException(CustomConstants.CAN_NOT_LOAD_DRIVER, e);
+			throw new JDBCConnectionException(Config.CAN_NOT_LOAD_DRIVER, e);
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < Config.POOL_SIZE; i++) {
 			pool.add(createConnection(cfg));
 		}
 	}
@@ -40,11 +45,11 @@ public class JDBCConnector {
 			conn = (Connection) DriverManager.getConnection(cfg.getURL(),
 					cfg.getLogin(), cfg.getPassword());
 		} catch (SQLException e) {
-			throw new JDBCConnectionException(CustomConstants.CAN_NOT_CONNECT, e);
+			throw new JDBCConnectionException(Config.CAN_NOT_CONNECT, e);
 		}
 		if (conn == null) {
 			throw new JDBCConnectionException(
-					CustomConstants.WRONG_DRIVER_TYPE + cfg.getDriverName() + ".");
+					Config.WRONG_DRIVER_TYPE + cfg.getDriverName() + ".");
 		}
 		return conn;
 	}
@@ -62,10 +67,10 @@ public class JDBCConnector {
 		try {
 			conn = pool.poll(500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			throw new JDBCConnectionException(CustomConstants.INTERRUPTED_ERROR, e);
+			throw new JDBCConnectionException(Config.INTERRUPTED_ERROR, e);
 		}
 		if(conn == null){
-			throw new JDBCConnectionException(CustomConstants.POOL_IS_EMPTY);
+			throw new JDBCConnectionException(Config.POOL_IS_EMPTY);
 		}
 		return conn;
 	}
@@ -79,8 +84,20 @@ public class JDBCConnector {
 				pool.put(conn);
 			}
 		} catch (InterruptedException e) {
-			throw new JDBCConnectionException(CustomConstants.INTERRUPTED_ERROR, e);
+			throw new JDBCConnectionException(Config.INTERRUPTED_ERROR, e);
 		}
 	}
-
+	
+	public static void destroyPool(){
+		if(pool!= null){
+			for (Connection connection : pool) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					theLogger.error(Config.CAN_NOT_CLOSE,e);;
+				}
+			}
+			pool = null;
+		}
+	}
 }

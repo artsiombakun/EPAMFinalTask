@@ -9,10 +9,10 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import command.ServiceLogoutPage;
+import util.Config;
+import command.LogoutCommand;
 import model.entities.Role;
 import model.entities.User;
-import constants.CustomConstants;
 
 @SuppressWarnings("serial")
 public class CheckAuthorizationTag extends TagSupport {
@@ -27,11 +27,11 @@ public class CheckAuthorizationTag extends TagSupport {
 		try {
 			HttpSession session = pageContext.getSession();
 		     if(session==null){
-		    	 pageContext.forward(CustomConstants.LOG_IN_PAGE);
+		    	 pageContext.forward(Config.LOG_IN_PAGE);
 		     }else{
-		    	 User currUser = (User) session.getAttribute(CustomConstants.USER_ATTR);
+		    	 User currUser = (User) session.getAttribute(Config.USER_ATTR);
 		    	 if( currUser == null || currUser.getRole()!=role){
-		    		 new ServiceLogoutPage().executePage(
+		    		 new LogoutCommand().executePage(
 		    				 (HttpServletRequest)pageContext.getRequest(), (HttpServletResponse)pageContext.getResponse());
 		    	 }
 		     }

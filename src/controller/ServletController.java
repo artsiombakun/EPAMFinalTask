@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.PropertyConfigurator;
 
-import command.ServicePageCommand;
+import util.Config;
+import command.Command;
 import command.builder.CommandBuilder;
-import constants.CustomConstants;
 
 @SuppressWarnings("serial")
 @WebServlet("/controller")
@@ -22,8 +22,7 @@ public class ServletController extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ServicePageCommand command = commands.getCommand((String) request
-				.getParameter(CustomConstants.COMMAND_TYPE_PARAM));
+		Command command = commands.getCommand((String) request.getParameter(Config.COMMAND_TYPE_PARAM));
 		if (command != null) {
 			command.executePage(request, response);
 		}
@@ -32,8 +31,7 @@ public class ServletController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ServicePageCommand command = commands.getCommand((String) request
-				.getParameter(CustomConstants.COMMAND_TYPE_PARAM));
+		Command command = commands.getCommand((String) request.getParameter(Config.COMMAND_TYPE_PARAM));
 		if (command != null) {
 			command.executePage(request, response);
 		}
@@ -42,7 +40,7 @@ public class ServletController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		PropertyConfigurator.configure(this.getClass().getResource("/")
-				.getPath() + CustomConstants.LOG4G_CONFIG_FILE_ADDRESS);
+				.getPath() + Config.LOG4G_CONFIG_FILE_ADDRESS);
 	}
 
 }

@@ -3,10 +3,11 @@ package filters;
 import java.io.IOException;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 
-import constants.CustomConstants;
-
+import util.Config;
+@WebFilter(value="/controller")
 public class CheckFullFieldsFilter implements Filter {
 
 	@Override
@@ -19,26 +20,24 @@ public class CheckFullFieldsFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		String errmsg = "";
-		if (CustomConstants.SIGN_UP_COMMAND.equals(req
-				.getParameter(CustomConstants.COMMAND_TYPE_PARAM))) {
-			if (req.getParameter(CustomConstants.FIRSTNAME_PARAM).isEmpty())
+		if (Config.SIGN_UP_COMMAND.equals(req.getParameter(Config.COMMAND_TYPE_PARAM))) {
+			if (req.getParameter(Config.FIRSTNAME_PARAM).isEmpty())
 				errmsg += "Input first name! ";
-			if (req.getParameter(CustomConstants.LASTNAME_PARAM).isEmpty())
+			if (req.getParameter(Config.LASTNAME_PARAM).isEmpty())
 				errmsg += "Input last name! ";
-			if (req.getParameter(CustomConstants.LOGIN_PARAM).isEmpty())
+			if (req.getParameter(Config.LOGIN_PARAM).isEmpty())
 				errmsg += "Input login! ";
-			if (req.getParameter(CustomConstants.PASSWORD_PARAM).isEmpty())
+			if (req.getParameter(Config.PASSWORD_PARAM).isEmpty())
 				errmsg += "Input password! ";
-			if (req.getParameter(CustomConstants.CONFIRM_PASSWORD_PARAM)
+			if (req.getParameter(Config.CONFIRM_PASSWORD_PARAM)
 					.isEmpty())
 				errmsg += "Input confirm password!";
 		}
-
 		if (errmsg.isEmpty()) {
 			fchain.doFilter(request, response);
 		} else {
-			req.setAttribute(CustomConstants.ERROR_ATTR, errmsg);
-			req.getRequestDispatcher(CustomConstants.SIGN_UP_PAGE).forward(req,
+			req.setAttribute(Config.ERROR_ATTR, errmsg);
+			req.getRequestDispatcher(Config.SIGN_UP_PAGE).forward(req,
 					resp);
 		}
 

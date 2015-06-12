@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import constants.CustomConstants;
+import util.Config;
 /**
  * This tag load dictionary locale for first visit 
  * */
@@ -25,16 +25,16 @@ public class LoadDefaultLocaleTag extends TagSupport {
 	private String language;
 
 	public int doStartTag() throws JspException {
-		if(pageContext.getServletContext().getAttribute(CustomConstants.DICTIONARY_ATTR)==null){
+		if(pageContext.getServletContext().getAttribute(Config.DICTIONARY_ATTR)==null){
 			Locale loc = new Locale(language, country);
 			Map <String, String> dictionary = new HashMap<String, String>();
-			ResourceBundle locale = ResourceBundle.getBundle(CustomConstants.LOCALE_ADDRESS, loc);
+			ResourceBundle locale = ResourceBundle.getBundle(Config.LOCALE_ADDRESS, loc);
 			Enumeration<String> e = locale.getKeys();
 			while(e.hasMoreElements()){
 				String key = e.nextElement();
 				dictionary.put(key, locale.getString(key));
 			}
-			pageContext.getServletContext().setAttribute(CustomConstants.DICTIONARY_ATTR, dictionary);
+			pageContext.getServletContext().setAttribute(Config.DICTIONARY_ATTR, dictionary);
 		}
 		return SKIP_BODY;
 	}

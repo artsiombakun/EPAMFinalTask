@@ -1,5 +1,5 @@
 package filters;
-
+/**@author Artyom*/
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,6 +15,9 @@ import model.DAO.DAOCard;
 import model.DAO.DAOUser;
 import exceptions.DAOException;
 import util.Config;
+/**
+ * Execute pagination at multipage lists
+ * */
 @WebFilter(value="/*")
 public class PaginationFilter implements Filter{
 

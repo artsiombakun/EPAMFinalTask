@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import util.Config;
 /**
- * get driver, url, login and password using any source, such as .properties file
+ * get driver, url, login and password using .properties file
  * </p>Singleton
  * */
 public class ConfigurationManager {

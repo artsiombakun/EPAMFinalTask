@@ -1,5 +1,7 @@
 package command.builder;
-
+/**
+ * @author Artyom
+ * */
 import util.Config;
 import command.BlockAccounCommand;
 import command.CreateAccountCommand;
@@ -14,7 +16,13 @@ import command.LoginCommand;
 import command.Command;
 
 public class CommandBuilder {
-	
+	/**
+	 * Provide new command depend on parameter
+	 * @param commandType - type of new command
+	 * @return new command with Command interface 
+	 * (null if unknown type at parameter)
+	 * @see Command
+	 * */
 	public Command getCommand(String commandType){
 		switch(commandType){
 		case Config.LOG_IN_COMMAND:

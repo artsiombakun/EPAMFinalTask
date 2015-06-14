@@ -5,6 +5,9 @@ import exceptions.DAOException;
 /**
  * @author Artyom
  */
+/**
+ * Data Access Object layer
+ * */
 class DAO {
 	/**
 	 * To connect to DB

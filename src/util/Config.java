@@ -1,19 +1,25 @@
 package util;
-
+/**
+ * @author Artyom
+ * This class stores all constants that used in the project
+ * */
 public class Config {
+	
+	//application name
+	//private static final String BASE_APPLICATION_URL = "";//"/Task6FinalWebProject";
+	
 	//packages
-	private static final String ADMIN_PACKAGE_PREFIX = "/admin";
-	private static final String CLIENT_PACKAGE_PREFIX = "/client";
-	private static final String MENU_PACKAGE_PREFIX = "/menu";
-	private static final String SERVICE_PACKAGE_PREFIX = "/service";
+	private static final String ADMIN_PACKAGE_PREFIX = "";//BASE_APPLICATION_URL + "/admin";
+	private static final String CLIENT_PACKAGE_PREFIX = "";//BASE_APPLICATION_URL + "/client";
+	private static final String SERVICE_PACKAGE_PREFIX = "";//BASE_APPLICATION_URL + "/service";
 	
 	//jsp-pages
 	public static final String UNLOCK_ACCOUNT_PAGE = ADMIN_PACKAGE_PREFIX + "/admin-unlock-account.jsp";
 	public static final String CREATE_ACCOUNT_PAGE = ADMIN_PACKAGE_PREFIX + "/admin-create-account.jsp";
 	public static final String GET_INFO_ABOUT_CLIENT_PAGE = ADMIN_PACKAGE_PREFIX + "/admin-get-info.jsp";
-	public static final String LOG_IN_PAGE = MENU_PACKAGE_PREFIX + "/log.jsp";
-	public static final String WELCOME_PAGE = MENU_PACKAGE_PREFIX + "/welcome.jsp";
-	public static final String SIGN_UP_PAGE = MENU_PACKAGE_PREFIX + "/sign-up.jsp";
+	public static final String LOG_IN_PAGE = "/log.jsp";
+	public static final String WELCOME_PAGE = "/welcome.jsp";
+	public static final String SIGN_UP_PAGE = "/sign-up.jsp";
 	public static final String CLOSE_ACCOUNT_CLIENT_PAGE = CLIENT_PACKAGE_PREFIX + "/client-close-account.jsp";
 	public static final String BLOCK_ACCOUNT_CLIENT_PAGE = CLIENT_PACKAGE_PREFIX + "/client-block-account.jsp";
 	public static final String CLIENT_TRANSFER_PAGE = CLIENT_PACKAGE_PREFIX + "/client-payment.jsp";
@@ -34,11 +40,12 @@ public class Config {
 	public static final String FILL_BALANCE_COMMAND = "fill-account-command";
 	public static final String PAGINATION_COMMAND = "pagination-command";
 	
-	//attributes at session scope
+	//attributes at session and request scope
 	public static final String CLIENT_LIST_ATTR = "clientlist";
 	public static final String ACCOUNT_LIST_ATTR = "acclist";
 	public static final String BLOCKED_ACCOUNTS_LIST_ATTR = "blockedAccs";
 	public static final String ERROR_ATTR = "errmsg";
+	public static final String SUCCESS_ATTR = "success";
 	public static final String ERROR_MSG_FOR_LOG = "error";
 	public static final String SUM_ATTR = "sum";
 	public static final String USER_ATTR = "user";
@@ -81,6 +88,8 @@ public class Config {
 	public static final int POOL_SIZE = 10;
 	public static final String NEXT_PAGE_TAG = "next";
 	public static final String PREVIOUS_PAGE_TAG = "prev";
+	public static final String LOCALE_LANGUAGE = "language";
+	public static final String LOCALE_COUNTRY = "country";
 	
 	//error messages
 	public static final String CAN_NOT_CONNECT = "Can't connect to database.";

@@ -1,5 +1,7 @@
 package command;
-
+/**
+ * @author Artyom
+ * */
 import java.io.IOException;
 import java.util.List;
 
@@ -34,12 +36,13 @@ public class BlockAccounCommand implements Command{
 				  }if(isOwn){
 					  if(DAOAccount.getInstance().blockAccount(from)){
 						  reloadAccountsList(id, request, response);
-						  request.setAttribute(Config.ERROR_ATTR, "Blocking done!");
+						  request.setAttribute(Config.SUCCESS_ATTR, "Blocking done!");
 					  }else
 						  request.setAttribute(Config.ERROR_ATTR, 
 								  "Blocking failed!Caused by: a)account do not exist b)accoun already blocked c)internal error.");
-				  }else
+				  }else{
 					  request.setAttribute(Config.ERROR_ATTR, "Blocking failed!You are not the owner of source account!");
+				  }
 			  }catch(NumberFormatException e){
 				  request.setAttribute(Config.ERROR_ATTR, "Input data should be integer!");
 			  }

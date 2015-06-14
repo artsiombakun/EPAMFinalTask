@@ -6,6 +6,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -16,7 +19,7 @@ import util.Config;
 @SuppressWarnings("serial")
 public class LoadDefaultLocaleTag extends TagSupport {
 	/**
-	 * country of locale, default US
+	 * country of locale, default EN
 	 * */
 	private String country;
 	/**
@@ -26,6 +29,12 @@ public class LoadDefaultLocaleTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
 		if(pageContext.getServletContext().getAttribute(Config.DICTIONARY_ATTR)==null){
+			for(Cookie cookie : ((HttpServletRequest)pageContext.getRequest()).getCookies()){
+				if(Config.LOCALE_LANGUAGE.equals(cookie.getName()) && cookie.getValue() != null)
+					language=cookie.getValue();
+				if(Config.LOCALE_COUNTRY.equals(cookie.getName()) && cookie.getValue() != null)
+					country=cookie.getValue();
+			}
 			Locale loc = new Locale(language, country);
 			Map <String, String> dictionary = new HashMap<String, String>();
 			ResourceBundle locale = ResourceBundle.getBundle(Config.LOCALE_ADDRESS, loc);
@@ -35,6 +44,9 @@ public class LoadDefaultLocaleTag extends TagSupport {
 				dictionary.put(key, locale.getString(key));
 			}
 			pageContext.getServletContext().setAttribute(Config.DICTIONARY_ATTR, dictionary);
+			HttpServletResponse resp = (HttpServletResponse) pageContext.getResponse();
+			resp.addCookie(new Cookie(Config.LOCALE_LANGUAGE, language));
+			resp.addCookie(new Cookie(Config.LOCALE_COUNTRY, country));
 		}
 		return SKIP_BODY;
 	}

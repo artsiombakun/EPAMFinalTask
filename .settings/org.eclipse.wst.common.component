@@ -3,6 +3,10 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/src/view"/>
+        <wb-resource deploy-path="/" source-path="/src/view/admin"/>
+        <wb-resource deploy-path="/" source-path="/src/view/client"/>
+        <wb-resource deploy-path="/" source-path="/src/view/service"/>
+        <wb-resource deploy-path="/" source-path="/src/view/startmenu"/>
         <property name="context-root" value="Task6FinalWebProject"/>
         <property name="java-output-path" value="/Task6FinalWebProject/build/classes"/>
     </wb-module>

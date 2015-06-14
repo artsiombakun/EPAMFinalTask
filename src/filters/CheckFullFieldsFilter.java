@@ -1,5 +1,5 @@
 package filters;
-
+/**@author Artyom*/
 import java.io.IOException;
 
 import javax.servlet.*;
@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 
 import util.Config;
+/**
+ * Check the fields of sign-up form at non-empty
+ * */
 @WebFilter(value="/controller")
 public class CheckFullFieldsFilter implements Filter {
 

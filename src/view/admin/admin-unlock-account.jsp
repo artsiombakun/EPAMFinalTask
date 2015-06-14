@@ -32,20 +32,30 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-4"></div>
-		<div class="col-sm-6">
-			<c:if test="${not empty errmsg}">
-				<div class="alert alert-danger" style="clear: both; width: 450px">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					${errmsg}
-				</div>
-			</c:if>
-			<c:if test="${empty blockedAccs}">
-				<div class="alert alert-danger" style="clear: both; width: 450px">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					Bank has no locked accounts!
-				</div>
-			</c:if>
-			<br /> <br />
+		<div class="col-sm-5">
+			<c:choose>
+					<c:when test="${not empty errmsg}">
+						<div class="alert alert-danger">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							${errmsg}
+						</div>
+					</c:when>
+					<c:when test="${not empty success}">
+						<div class="alert alert-success">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							${success}
+						</div>
+					</c:when>
+					<c:when test="${empty blockedAccs}">
+					<div class="alert alert-danger" style="clear: both; width: 450px">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						Bank has no locked accounts!
+					</div>
+					</c:when>
+					<c:otherwise>
+						<br> <br>
+					</c:otherwise>
+				</c:choose>
 			<form method="post" action="controller">
 				<input type="hidden" name="command" value="unlock-account-command">
 				<span>${dictionary["ACCOUNT_TO_UNLOCK"]}</span> <input type="text"

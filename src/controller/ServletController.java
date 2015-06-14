@@ -1,5 +1,5 @@
 package controller;
-
+/**@author Artyom*/
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -13,11 +13,14 @@ import org.apache.log4j.PropertyConfigurator;
 import util.Config;
 import command.Command;
 import command.builder.CommandBuilder;
-
+/**
+ * It receives requests and passes them for service to the relevant commands
+ * */
 @SuppressWarnings("serial")
 @WebServlet("/controller")
 public class ServletController extends HttpServlet {
-	CommandBuilder commands = new CommandBuilder();
+	
+	private CommandBuilder commands = new CommandBuilder();
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

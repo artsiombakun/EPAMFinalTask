@@ -1,5 +1,5 @@
 package tags;
-
+/**@author Artyom*/
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -13,7 +13,9 @@ import util.Config;
 import command.LogoutCommand;
 import model.entities.Role;
 import model.entities.User;
-
+/**
+ * Checks whether the current user is permitted access to the current page
+ * */
 @SuppressWarnings("serial")
 public class CheckAuthorizationTag extends TagSupport {
 	

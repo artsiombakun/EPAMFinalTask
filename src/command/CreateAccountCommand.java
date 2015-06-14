@@ -22,7 +22,7 @@ public class CreateAccountCommand  implements Command{
 		  try{
 			  id = Integer.parseInt(request.getParameter(Config.ID_PARAM));
 			  if(DAOAccount.getInstance().createAccount(id)){
-				  request.setAttribute(Config.ERROR_ATTR, "Account created!");
+				  request.setAttribute(Config.SUCCESS_ATTR, "Account created!");
 			  }else{
 				  request.setAttribute(Config.ERROR_ATTR, "Creation failed!Caused by: "
 				  		+ "a)client do not exist; b)internal error.");

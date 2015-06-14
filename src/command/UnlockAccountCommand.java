@@ -22,7 +22,7 @@ public class UnlockAccountCommand implements Command{
 		  try{
 			  id = Integer.parseInt(request.getParameter(Config.UNLOCK_ID_PARAM));
 			  if(DAOAccount.getInstance().unlockAccount(id)){
-				  request.setAttribute(Config.ERROR_ATTR, "Account unlocked!");
+				  request.setAttribute(Config.SUCCESS_ATTR, "Account unlocked!");
 			  }else{
 				  request.setAttribute(Config.ERROR_ATTR, "Unlocking failed!Caused by: "
 				  		+ "a)account do not exist; b)account already open; c)internal error.");

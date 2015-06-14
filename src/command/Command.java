@@ -8,11 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
- * Command for service any JSP-page
+ * Command for service any form at JSP-page
  * */
 public interface Command {
 	/**
-	 * execute actions for service JSP-page
+	 * execute actions for service selected form at JSP-page
 	 * */
 	public void executePage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException;

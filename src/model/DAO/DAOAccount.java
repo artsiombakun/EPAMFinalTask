@@ -1,5 +1,5 @@
 package model.DAO;
-
+/**@author Artyom*/
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -87,7 +87,7 @@ public class DAOAccount extends DAO{
 				psCrCard.close();
 				psCrAcc.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -151,7 +151,7 @@ public class DAOAccount extends DAO{
 				psTo.close();
 				psNote.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -199,7 +199,7 @@ public class DAOAccount extends DAO{
 				psBalance.close();
 				psClose.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -239,7 +239,7 @@ public class DAOAccount extends DAO{
 				conn.setAutoCommit(true);
 				psBlock.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -279,7 +279,7 @@ public class DAOAccount extends DAO{
 				conn.setAutoCommit(true);
 				psBlock.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -289,7 +289,7 @@ public class DAOAccount extends DAO{
 	/**
 	 * fill balance at account
 	 */
-	public boolean fillAccount(int accTo, int sum) throws DAOException {
+	public boolean fillAccount(int accID, int sum) throws DAOException {
 		if(sum<0)
 			return false;
 		PreparedStatement psTo = null, psIsEx = null;
@@ -299,10 +299,10 @@ public class DAOAccount extends DAO{
 				conn = cnr.getConnection();
 				psIsEx = (PreparedStatement) conn
 						.prepareStatement(IS_ACC_EXIST);
-				psIsEx.setInt(1, accTo);
+				psIsEx.setInt(1, accID);
 				psTo = (PreparedStatement) conn.prepareStatement(TRANSFER_TO);
 				psTo.setInt(1, sum);
-				psTo.setInt(2, accTo);
+				psTo.setInt(2, accID);
 				if (sum>0 && psIsEx.executeQuery().next()) {
 					if(psTo.executeUpdate()==1){
 						rez = true;
@@ -317,7 +317,7 @@ public class DAOAccount extends DAO{
 			try {
 				psTo.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}

@@ -17,9 +17,7 @@ import org.apache.log4j.Logger;
 
 import util.Config;
 import exceptions.DAOException;
-/**
- * Command for service get-info-admin page
- * */
+
 public class GetInfoAboutClientCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(GetInfoAboutClientCommand.class);
 	

@@ -19,9 +19,7 @@ import model.entities.Account;
 import model.entities.Role;
 import model.entities.User;
 import exceptions.DAOException;
-/**
- * Command for service login-page
- * */
+
 public class LoginCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(LoginCommand.class);
 

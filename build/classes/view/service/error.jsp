@@ -12,24 +12,24 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<title>ERROR</title>
+<title>${dictionary["ERROR_OCCURED"]}</title>
 </head>
 
 <body>
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
-			<h1>An error has occurred:</h1>
+			<h1>${dictionary["ERROR_OCCURED"]}:</h1>
 			<h3>
 				<span style="color: red">${error}</span>
 			</h3>
-			<h4>For details, see the log.</h4>
+			<h4>${dictionary["SEE_LOG"]}</h4>
 			<br />
 			<br />
 			<br />
 			<form method="post" action="controller">
 				<input type="hidden" name="command" value="log-out-command">
-				<button class="btn btn-warning">Try log in again</button>
+				<button class="btn btn-warning">${dictionary["LOG_IN_AGAIN"]}</button>
 			</form>
 		</div>
 	</div>

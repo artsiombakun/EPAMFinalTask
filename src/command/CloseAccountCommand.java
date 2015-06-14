@@ -18,9 +18,7 @@ import model.DAO.DAOCard;
 import model.entities.Account;
 import model.entities.User;
 import exceptions.DAOException;
-/**
- * Command for service close-account page
- * */
+
 public class CloseAccountCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(CloseAccountCommand.class);
 	
@@ -37,7 +35,7 @@ public class CloseAccountCommand implements Command{
 				  }if(isOwn){
 					  if(DAOAccount.getInstance().closeAccount(from, to)){
 						  reloadAccountsList(id, request, response);
-						  request.setAttribute(Config.ERROR_ATTR, "Closing done!");
+						  request.setAttribute(Config.SUCCESS_ATTR, "Closing done!");
 					  }else
 						  request.setAttribute(Config.ERROR_ATTR, 
 								  "Closing failed!Caused by a)one/both accounts do not exist; "
@@ -47,11 +45,11 @@ public class CloseAccountCommand implements Command{
 			  }catch(NumberFormatException e){
 				  request.setAttribute(Config.ERROR_ATTR, "Input data should be integer!");
 			  }
-			  request.getRequestDispatcher(Config.CLOSE_ACCOUNT_CLIENT_PAGE).forward(request, response);
+			 request.getRequestDispatcher(Config.CLOSE_ACCOUNT_CLIENT_PAGE).forward(request, response);
 		}catch(DAOException e){
 			  theLogger.error(e);
 			  request.setAttribute(Config.ERROR_MSG_FOR_LOG,e.getMessage());
-			  request.getRequestDispatcher(Config.ERROR_PAGE).forward(request, response);
+			   request.getRequestDispatcher(Config.ERROR_PAGE).forward(request, response);
 		}
 	}
 

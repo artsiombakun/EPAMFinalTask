@@ -1,5 +1,5 @@
 package model.DAO;
-
+/**@author Artyom*/
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class DAOUser extends DAO{
 				psSignClient.close();
 				psSignUser.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -120,7 +120,7 @@ public class DAOUser extends DAO{
 			try {
 				psAthr.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -149,7 +149,7 @@ public class DAOUser extends DAO{
 			try {
 				psInfo.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -157,7 +157,9 @@ public class DAOUser extends DAO{
 	}
 	
 	/**
-	 * get page from list of clients at payment system 
+	 * get one page from list of clients at payment system 
+	 * @param page - number of page(start from 0)
+	 * @param capacity - count of records at one page
 	 * */
 	public List<Client> getClientListPage(int page, int capacity) throws DAOException {
 		PreparedStatement psInfo = null;
@@ -180,7 +182,7 @@ public class DAOUser extends DAO{
 			try {
 				psInfo.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}

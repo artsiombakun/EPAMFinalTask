@@ -1,5 +1,5 @@
 package model.entities;
-
+/**@author Artyom*/
 import java.io.Serializable;
 
 @SuppressWarnings("serial")

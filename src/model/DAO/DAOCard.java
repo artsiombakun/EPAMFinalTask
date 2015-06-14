@@ -1,5 +1,5 @@
 package model.DAO;
-
+/**@author Artyom*/
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ public class DAOCard extends DAO{
 	 * */
 	private final String INFO_ABOUT_ACC = "SELECT account.ID, balance, status "
 			+ "FROM account INNER JOIN card ON account.ID = card.accountID WHERE ownerID = ?";
-	private final String BLOCKED_ACC_LIST = "SELECT ID, balance, status FROM account WHERE status='blocked'";
 	private final String BLOCKED_ACC_LIST_PAGE = "SELECT account.ID, account.balance, account.status FROM account "
 			+ "JOIN (SELECT ID FROM account WHERE status='blocked' ORDER BY ID LIMIT ?, ?) as acc ON acc.ID =  account.ID";
 	private final String BLOCKED_ACC_LIST_TOTAL_RECORDS = "SELECT COUNT(ID) FROM account WHERE status='blocked'";
@@ -39,7 +38,6 @@ public class DAOCard extends DAO{
 		super();
 	}
 	
-	/**
 	/**
 	 * get accounts of select client
 	 * */
@@ -65,7 +63,7 @@ public class DAOCard extends DAO{
 			try {
 				psInfo.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -94,7 +92,7 @@ public class DAOCard extends DAO{
 			try {
 				psInfo.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}
@@ -102,7 +100,9 @@ public class DAOCard extends DAO{
 	}
 	
 	/** 
-	* get page from blocked accounts of select client
+	* get one page from blocked accounts of select client
+	* @param page - number of page(start from 0)
+	* @param capacity - count of records at one page
 	 * */
 	public List<Account> blockedAccListPage(int page, int capacity) throws DAOException {
 		PreparedStatement psInfo = null;
@@ -127,38 +127,7 @@ public class DAOCard extends DAO{
 			try {
 				psInfo.close();
 				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
-				throw new DAOException(Config.CAN_NOT_CLOSE, e);
-			}
-		}
-		return rez;
-	}
-	
-	/** 
-	* get blocked accounts of select client
-	 * */
-	public List<Account> blockedAccList() throws DAOException {
-		PreparedStatement psInfo = null;
-		Connection conn = null;
-		List<Account> rez = new ArrayList<Account>();
-		try {
-			conn = cnr.getConnection();
-			psInfo = (PreparedStatement) conn.prepareStatement(BLOCKED_ACC_LIST);
-			ResultSet rs = psInfo.executeQuery();
-			if (rs.next()) {
-				do {
-					rez.add(new Account(rs.getInt(1), rs.getInt(2), rs.getString(3)));
-				} while (rs.next());
-			}
-		} catch (JDBCConnectionException e) {
-			throw new DAOException(Config.CONN_UNAVAILABLE, e);
-		} catch (SQLException e) {
-			throw new DAOException(Config.CAN_NOT_CONNECT, e);
-		} finally {
-			try {
-				psInfo.close();
-				cnr.returnConnection(conn);
-			} catch (SQLException | JDBCConnectionException e) {
+			} catch (SQLException e) {
 				throw new DAOException(Config.CAN_NOT_CLOSE, e);
 			}
 		}

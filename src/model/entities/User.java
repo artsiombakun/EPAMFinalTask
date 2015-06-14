@@ -1,5 +1,5 @@
 package model.entities;
-
+/**@author Artyom*/
 public class User {
 	private Role role;
 	private int id;

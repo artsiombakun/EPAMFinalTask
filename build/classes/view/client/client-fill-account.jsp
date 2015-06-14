@@ -34,13 +34,24 @@
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
-			<c:if test="${not empty errmsg}">
-				<div class="alert alert-danger">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					${errmsg}
-				</div>
-			</c:if>
-			<br> <br>
+			<br><br>
+			<c:choose>
+				<c:when test="${not empty errmsg}">
+					<div class="alert alert-danger">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						${errmsg}
+					</div>
+				</c:when>
+				<c:when test="${not empty success}">
+					<div class="alert alert-success">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						${success}
+					</div>
+				</c:when>
+				<c:otherwise>
+					<br> <br>
+				</c:otherwise>
+			</c:choose>
 			<form method="post" action="controller">
 				<input type="hidden" name="command" value="fill-account-command">
 				<div class="row">

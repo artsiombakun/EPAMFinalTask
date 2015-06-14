@@ -16,7 +16,7 @@ import com.mysql.jdbc.Connection;
 
 import exceptions.JDBCConnectionException;
 /**
- * Get connection to DB, using data from source
+ * Provide connection to DB
  * */
 public class JDBCConnector {
 	/**
@@ -67,7 +67,7 @@ public class JDBCConnector {
 		try {
 			conn = pool.poll(500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			throw new JDBCConnectionException(Config.INTERRUPTED_ERROR, e);
+			theLogger.error(Config.INTERRUPTED_ERROR, e);
 		}
 		if(conn == null){
 			throw new JDBCConnectionException(Config.POOL_IS_EMPTY);
@@ -75,16 +75,15 @@ public class JDBCConnector {
 		return conn;
 	}
 	/**
-	 * Put connection into pool
-	 * @throws JDBCConnectionException 
+	 * Put connection into pool if it's not closed
 	 * */
-	public void returnConnection(Connection conn) throws JDBCConnectionException{
+	public void returnConnection(Connection conn){
 		try {
 			if(conn != null && !conn.isClosed()){
 				pool.put(conn);
 			}
 		} catch (InterruptedException e) {
-			throw new JDBCConnectionException(Config.INTERRUPTED_ERROR, e);
+			theLogger.error(Config.INTERRUPTED_ERROR, e);
 		}
 	}
 	

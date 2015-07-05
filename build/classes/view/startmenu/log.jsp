@@ -24,7 +24,7 @@
 					<button class="btn btn-success">${dictionary["LANGUAGE"]}</button>
 				</form>
 			</li>
-			<li><a href="welcome.jsp">${dictionary["WELCOME_PAGE"]}</a></li>
+			<li><a href="index.jsp">${dictionary["WELCOME_PAGE"]}</a></li>
 			<li class="active"><a href="log.jsp">${dictionary["LOG_IN"]}</a></li>
 			<li><a href="sign-up.jsp">${dictionary["SIGN_UP"]}</a></li>
 		</ul>
@@ -47,14 +47,14 @@
 				</c:choose>
 				<input type="hidden" name="command" value="log-in-command">
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["LOGIN"]}</span>
 					</div>
 					<input type="text" name="login" autocomplete="off"><br>
 					<br>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["PASSWORD"]}</span>
 					</div>
 					<input type="password" name="pswd" autocomplete="off"><br>

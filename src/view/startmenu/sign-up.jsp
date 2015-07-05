@@ -24,7 +24,7 @@
 					<button class="btn btn-success">${dictionary["LANGUAGE"]}</button>
 				</form>
 			</li>
-			<li><a href="welcome.jsp">${dictionary["WELCOME_PAGE"]}</a></li>
+			<li><a href="index.jsp">${dictionary["WELCOME_PAGE"]}</a></li>
 			<li><a href="log.jsp">${dictionary["LOG_IN"]}</a></li>
 			<li class="active"><a href="sign-up.jsp">${dictionary["SIGN_UP"]}</a></li>
 		</ul>
@@ -47,7 +47,7 @@
 				</c:choose>
 				<input type="hidden" name="command" value="sign-up-command">
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["FIRST_NAME"]}</span>
 					</div>
 					<div class="col-sm-3">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["LAST_NAME"]}</span>
 					</div>
 					<div class="col-sm-3">
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["LOGIN"]}</span>
 					</div>
 					<div class="col-sm-3">
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["PASSWORD"]}</span>
 					</div>
 					<div class="col-sm-3">
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-5">
 						<span>${dictionary["CONFIRM_PASSWORD"]}</span>
 					</div>
 					<div class="col-sm-3">

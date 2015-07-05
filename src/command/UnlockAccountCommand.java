@@ -1,6 +1,8 @@
 package command;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import model.DAO.DAOAccount;
 import model.DAO.DAOCard;
+
 import org.apache.log4j.Logger;
 
 import util.Config;
@@ -16,21 +19,22 @@ import exceptions.DAOException;
 public class UnlockAccountCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(UnlockAccountCommand.class);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void executePage(HttpServletRequest request,	HttpServletResponse response) throws ServletException, IOException {
 		int id = 0;
+		Map<String, String> msgs = (Map<String, String>) request.getServletContext().getAttribute(Config.DICTIONARY_ATTR);
 		  try{
 			  id = Integer.parseInt(request.getParameter(Config.UNLOCK_ID_PARAM));
 			  if(DAOAccount.getInstance().unlockAccount(id)){
-				  request.setAttribute(Config.SUCCESS_ATTR, "Account unlocked!");
+				  request.setAttribute(Config.SUCCESS_ATTR, msgs.get(Config.UNLOCK_DONE));
 			  }else{
-				  request.setAttribute(Config.ERROR_ATTR, "Unlocking failed!Caused by: "
-				  		+ "a)account do not exist; b)account already open; c)internal error.");
+				  request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.UNLOCK_FAIL) + msgs.get(Config.UNLOCK_FAIL_CAUSE));
 			  }
 			  reloadBlockedAccountsList(request, response);
 			  request.getRequestDispatcher(Config.UNLOCK_ACCOUNT_PAGE).forward(request, response);
 		  }catch(NumberFormatException e){
-			  request.setAttribute(Config.ERROR_ATTR, "ID should be integer!");
+			  request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.INT_ID));
 			  request.getRequestDispatcher(Config.UNLOCK_ACCOUNT_PAGE).forward(request, response);
 		  }catch(DAOException e){
 			  theLogger.error(e);

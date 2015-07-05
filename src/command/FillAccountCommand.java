@@ -2,6 +2,7 @@ package command;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,10 @@ import exceptions.DAOException;
 public class FillAccountCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(FillAccountCommand.class);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void executePage(HttpServletRequest request,	HttpServletResponse response) throws ServletException, IOException{
+		Map<String, String> msgs = (Map<String, String>) request.getServletContext().getAttribute(Config.DICTIONARY_ATTR);
 		try{
 			try{
 				int id = ((User) request.getSession().getAttribute(Config.USER_ATTR)).getId();
@@ -35,14 +38,13 @@ public class FillAccountCommand implements Command{
 				if(isOwn){
 					if(DAOAccount.getInstance().fillAccount(to, sum)){
 						 reloadAccountsList(id, request, response);
-						request.setAttribute(Config.SUCCESS_ATTR, "Filling has done!");
+						request.setAttribute(Config.SUCCESS_ATTR, msgs.get(Config.FILL_DONE));
 					}else
-						request.setAttribute(Config.ERROR_ATTR, "Filling failed!Caused by a)account do not exist; "
-								+ "b)accounts is closed; c)internal error.");
+						request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.FILL_FAIL)+msgs.get(Config.FILL_FAIL_CAUSE));
 				}else
-					request.setAttribute(Config.ERROR_ATTR, "Filling failed!You are not the owner of source account!");
+					request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.FILL_FAIL) + msgs.get(Config.NOT_OWNER));
 		}catch(NumberFormatException e){
-			request.setAttribute(Config.ERROR_ATTR, "Input data should be integer!");
+			request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.INT_DATA));
 		}
 			request.getRequestDispatcher(Config.FILL_BALANCE_PAGE).forward(request, response);
 		}catch(DAOException e){

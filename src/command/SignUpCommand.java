@@ -1,6 +1,7 @@
 package command;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import exceptions.DAOException;
 public class SignUpCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(SignUpCommand.class);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void executePage(HttpServletRequest request,	HttpServletResponse response) throws ServletException, IOException {
+		Map<String, String> msgs = (Map<String, String>) request.getServletContext().getAttribute(Config.DICTIONARY_ATTR);
 		try {
 			String fname = new String(request.getParameter(Config.FIRSTNAME_PARAM).getBytes("ISO-8859-1"),"UTF-8"),
 					lname = new String(request.getParameter(Config.LASTNAME_PARAM).getBytes("ISO-8859-1"),"UTF-8"),
@@ -28,11 +31,11 @@ public class SignUpCommand implements Command{
 					new LoginCommand().executePage(request, response);
 				}
 				else{
-					request.setAttribute(Config.ERROR_ATTR, "This login is already in use!");
+					request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.LOGIN_IN_USE));
 					request.getRequestDispatcher(Config.SIGN_UP_PAGE).forward(request, response);
 				}
 			}else{
-				request.setAttribute(Config.ERROR_ATTR, "The password is not confirmed!");
+				request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.PSWD_NOT_CONFIRMED));
 				request.getRequestDispatcher(Config.SIGN_UP_PAGE).forward(request, response);
 			}
 		 }catch(DAOException e){

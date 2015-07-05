@@ -13,8 +13,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import util.Config;
+
 /**
- * This tag load dictionary locale for first visit 
+ * This tag load dictionary locale for first visit
  * */
 @SuppressWarnings("serial")
 public class LoadDefaultLocaleTag extends TagSupport {
@@ -28,18 +29,21 @@ public class LoadDefaultLocaleTag extends TagSupport {
 	private String language;
 
 	public int doStartTag() throws JspException {
-		if(pageContext.getServletContext().getAttribute(Config.DICTIONARY_ATTR)==null){
-			for(Cookie cookie : ((HttpServletRequest)pageContext.getRequest()).getCookies()){
-				if(Config.LOCALE_LANGUAGE.equals(cookie.getName()) && cookie.getValue() != null)
-					language=cookie.getValue();
-				if(Config.LOCALE_COUNTRY.equals(cookie.getName()) && cookie.getValue() != null)
-					country=cookie.getValue();
+		if (pageContext.getServletContext().getAttribute(Config.DICTIONARY_ATTR) == null) {
+			HttpServletRequest req = (HttpServletRequest) pageContext.getRequest();
+			if (req != null) {
+				for (Cookie cookie : req.getCookies()) {
+					if (Config.LOCALE_LANGUAGE.equals(cookie.getName()) && cookie.getValue() != null)
+						language = cookie.getValue();
+					if (Config.LOCALE_COUNTRY.equals(cookie.getName()) && cookie.getValue() != null)
+						country = cookie.getValue();
+				}
 			}
 			Locale loc = new Locale(language, country);
-			Map <String, String> dictionary = new HashMap<String, String>();
+			Map<String, String> dictionary = new HashMap<String, String>();
 			ResourceBundle locale = ResourceBundle.getBundle(Config.LOCALE_ADDRESS, loc);
 			Enumeration<String> e = locale.getKeys();
-			while(e.hasMoreElements()){
+			while (e.hasMoreElements()) {
 				String key = e.nextElement();
 				dictionary.put(key, locale.getString(key));
 			}

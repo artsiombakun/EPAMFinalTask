@@ -6,7 +6,7 @@ package util;
 public class Config {
 	
 	//application name
-	//private static final String BASE_APPLICATION_URL = "";//"/Task6FinalWebProject";
+	public static final String BASE_APPLICATION_URL = "/Task6FinalWebProject";
 	
 	//packages
 	private static final String ADMIN_PACKAGE_PREFIX = "";//BASE_APPLICATION_URL + "/admin";
@@ -77,7 +77,7 @@ public class Config {
 	
 	//separate constants
 	public static final String LANGUAGE = "LANGUAGE";
-	public static final String LOCALE_ADDRESS = "resources.MyLocale";
+	public static final String LOCALE_ADDRESS = "resources.Locale";
 	public static final String DB_CONFIG_FILE_ADDRESS = "resources\\database.properties";
 	public static final String LOG4G_CONFIG_FILE_ADDRESS = "resources/mylog4j.properties";
 	public static final String DRIVER_TAG = "driver";
@@ -91,7 +91,7 @@ public class Config {
 	public static final String LOCALE_LANGUAGE = "language";
 	public static final String LOCALE_COUNTRY = "country";
 	
-	//error messages
+	//errors descriptions
 	public static final String CAN_NOT_CONNECT = "Can't connect to database.";
 	public static final String CONN_UNAVAILABLE = "Connection to DB is unavailable.";
 	public static final String CAN_NOT_CLOSE = "Can't close connection.";
@@ -101,4 +101,35 @@ public class Config {
 	public static final String WRONG_DRIVER_TYPE = "Driver type is not correct in URL ";
 	public static final String CAN_NOT_LOAD_DB_CONFIG_FILE = "Can't load .properties file.";
 	
+	//tags for localized messages for user
+	public static final String INT_ID = "INT_ID";
+	public static final String INT_DATA = "INT_DATA";
+	public static final String NOT_OWNER = "NOT_OWNER";
+	public static final String BLOCKING_DONE = "BLOCKING_DONE";
+	public static final String BLOCK_FAIL = "BLOCK_FAIL";
+	public static final String BLOCK_FAIL_CAUSE = "BLOCK_FAIL_CAUSE";
+	public static final String AUTH_FAIL="AUTH_FAIL";
+	public static final String CLOSE_DONE = "CLOSE_DONE";
+	public static final String CLOSE_FAIL = "CLOSE_FAIL";
+	public static final String CLOSE_FAIL_CAUSE = "CLOSE_FAIL_CAUSE";
+	public static final String LOGIN_IN_USE = "LOGIN_IN_USE";
+	public static final String PSWD_NOT_CONFIRMED = "PSWD_NOT_CONFIRMED";
+	public static final String INPUT = "INPUT";
+	public static final String LOGIN = "LOGIN";
+	public static final String PASSWORD = "PASSWORD";
+	public static final String CONFIRM_PASSWORD = "CONFIRM_PASSWORD";
+	public static final String FIRST_NAME = "FIRST_NAME";
+	public static final String LAST_NAME = "LAST_NAME";
+	public static final String FILL_DONE = "FILL_DONE";
+	public static final String FILL_FAIL = "FILL_FAIL";
+	public static final String FILL_FAIL_CAUSE = "FILL_FAIL_CAUSE";
+	public static final String TRANSFER_DONE = "TRANSFER_DONE";
+	public static final String TRANSFER_FAIL = "TRANSFER_FAIL";
+	public static final String TRANSFER_FAIL_CAUSE = "TRANSFER_FAIL_CAUSE";
+	public static final String UNLOCK_DONE = "UNLOCK_DONE";
+	public static final String UNLOCK_FAIL = "UNLOCK_FAIL";
+	public static final String UNLOCK_FAIL_CAUSE = "UNLOCK_FAIL_CAUSE";
+	public static final String CREATE_DONE = "CREATE_DONE";
+	public static final String CREATE_FAIL = "CREATE_FAIL";
+	public static final String CREATE_FAIL_CAUSE = "CREATE_FAIL_CAUSE";
 }

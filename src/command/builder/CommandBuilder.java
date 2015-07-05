@@ -3,7 +3,7 @@ package command.builder;
  * @author Artyom
  * */
 import util.Config;
-import command.BlockAccounCommand;
+import command.BlockAccountCommand;
 import command.CreateAccountCommand;
 import command.FillAccountCommand;
 import command.LogoutCommand;
@@ -34,7 +34,7 @@ public class CommandBuilder {
 		case Config.CLOSE_ACCOUNT_CLIENT_COMMAND:
 			return new CloseAccountCommand();
 		case Config.BLOCK_ACCOUNT_CLIENT_COMMAND:
-			return new BlockAccounCommand();
+			return new BlockAccountCommand();
 		case Config.FILL_BALANCE_COMMAND:
 			return new FillAccountCommand();
 		case Config.UNLOCK_ACCOUNT_COMMAND:

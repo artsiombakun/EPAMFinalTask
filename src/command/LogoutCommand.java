@@ -19,7 +19,8 @@ public class LogoutCommand implements Command{
 		session.setAttribute(Config.USER_ATTR, null);
 		session.setAttribute(Config.BLOCKED_ACCOUNTS_LIST_ATTR, null);
 		session.invalidate();//destroy session
-		request.getRequestDispatcher(Config.LOG_IN_PAGE).forward(request, response);
+		//request.getRequestDispatcher(Config.LOG_IN_PAGE).forward(request, response);
+		response.sendRedirect(Config.BASE_APPLICATION_URL+Config.LOG_IN_PAGE);
 	}
 
 }

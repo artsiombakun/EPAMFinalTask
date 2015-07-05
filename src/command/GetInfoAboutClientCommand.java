@@ -4,6 +4,7 @@ package command;
  * */
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,15 +22,17 @@ import exceptions.DAOException;
 public class GetInfoAboutClientCommand implements Command{
 	private static Logger theLogger = Logger.getLogger(GetInfoAboutClientCommand.class);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void executePage(HttpServletRequest request,	HttpServletResponse response) throws ServletException, IOException {
 		int id = 0;
+		Map<String, String> msgs = (Map<String, String>) request.getServletContext().getAttribute(Config.DICTIONARY_ATTR);
 		  try{
 			  id = Integer.parseInt(request.getParameter(Config.ID_PARAM));
 			  reloadAccountsList(id, request, response);
 			  request.getRequestDispatcher(Config.GET_INFO_ABOUT_CLIENT_PAGE).forward(request, response);
 		  }catch(NumberFormatException e){
-			  request.setAttribute(Config.ERROR_ATTR, "ID should be integer!");
+			  request.setAttribute(Config.ERROR_ATTR, msgs.get(Config.INT_ID));
 			  request.getRequestDispatcher(Config.GET_INFO_ABOUT_CLIENT_PAGE).forward(request, response);
 		  }catch(DAOException e){
 			  theLogger.error(e);

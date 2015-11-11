@@ -33,7 +33,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-4"></div>
-		<div class="col-sm-5">
+		<div class="col-sm-4">
 			<br><br>
 			<c:choose>
 				<c:when test="${not empty errmsg}">

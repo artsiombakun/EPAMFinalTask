@@ -1,4 +1,5 @@
 package connectDB;
+
 /**
  * @author Artyom
  * */
@@ -15,6 +16,7 @@ import util.Config;
 import com.mysql.jdbc.Connection;
 
 import exceptions.JDBCConnectionException;
+
 /**
  * Provide connection to DB
  * */
@@ -23,9 +25,9 @@ public class JDBCConnector {
 	 * Pool of connections to DB
 	 * */
 	private static BlockingQueue<Connection> pool;
-	
+
 	private static Logger theLogger = Logger.getLogger(JDBCConnector.class);
-	
+
 	private synchronized void initJDBCConnector() throws JDBCConnectionException {
 		pool = new LinkedBlockingQueue<Connection>();
 		ConfigurationManager cfg = ConfigurationManager.getInstance();
@@ -38,29 +40,29 @@ public class JDBCConnector {
 			pool.add(createConnection(cfg));
 		}
 	}
-	
+
 	private synchronized Connection createConnection(ConfigurationManager cfg) throws JDBCConnectionException {
 		Connection conn;
 		try {
-			conn = (Connection) DriverManager.getConnection(cfg.getURL(),
-					cfg.getLogin(), cfg.getPassword());
+			conn = (Connection) DriverManager.getConnection(cfg.getURL(), cfg.getLogin(), cfg.getPassword());
 		} catch (SQLException e) {
 			throw new JDBCConnectionException(Config.CAN_NOT_CONNECT, e);
 		}
 		if (conn == null) {
-			throw new JDBCConnectionException(
-					Config.WRONG_DRIVER_TYPE + cfg.getDriverName() + ".");
+			throw new JDBCConnectionException(Config.WRONG_DRIVER_TYPE + cfg.getDriverName() + ".");
 		}
 		return conn;
 	}
-	
+
 	/**
 	 * Retrieves and remove connection from pool
+	 * 
 	 * @return connection to DB
-	 * @throws JDBCConnectionException if pool is empty
+	 * @throws JDBCConnectionException
+	 *             if pool is empty
 	 * */
 	public synchronized Connection getConnection() throws JDBCConnectionException {
-		if(pool==null){
+		if (pool == null) {
 			initJDBCConnector();
 		}
 		Connection conn = null;
@@ -69,31 +71,32 @@ public class JDBCConnector {
 		} catch (InterruptedException e) {
 			theLogger.error(Config.INTERRUPTED_ERROR, e);
 		}
-		if(conn == null){
+		if (conn == null) {
 			throw new JDBCConnectionException(Config.POOL_IS_EMPTY);
 		}
 		return conn;
 	}
+
 	/**
 	 * Put connection into pool if it's not closed
 	 * */
-	public void returnConnection(Connection conn){
+	public void returnConnection(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed()){
+			if (conn != null && !conn.isClosed()) {
 				pool.put(conn);
 			}
 		} catch (InterruptedException e) {
 			theLogger.error(Config.INTERRUPTED_ERROR, e);
 		}
 	}
-	
-	public static void destroyPool(){
-		if(pool!= null){
+
+	public static void destroyPool() {
+		if (pool != null) {
 			for (Connection connection : pool) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
-					theLogger.error(Config.CAN_NOT_CLOSE,e);;
+					theLogger.error(Config.CAN_NOT_CLOSE, e);
 				}
 			}
 			pool = null;

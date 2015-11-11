@@ -32,8 +32,8 @@
 		</ul>
 	</div>
 	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
 			<br><br>
 			<c:choose>
 				<c:when test="${not empty errmsg}">
@@ -55,14 +55,14 @@
 			<form method="post" action="controller">
 				<input type="hidden" name="command" value="close-account-command" />
 				<div class="row">
-					<div class="col-sm-5">
+					<div class="col-sm-6">
 						<span>${dictionary["CLOSE_ACCOUNT"]}</span>
 					</div>
 					<input type="text" name="from">
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-sm-5">
+					<div class="col-sm-6">
 						<span>${dictionary["TRANSFER_REST_TO"]}</span>
 					</div>
 					<input type="text" name="to">

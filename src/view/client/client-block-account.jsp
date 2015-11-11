@@ -32,9 +32,9 @@
 		</ul>
 	</div>
 	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<br><br>
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<br> <br>
 			<c:choose>
 				<c:when test="${not empty errmsg}">
 					<div class="alert alert-danger">
@@ -42,20 +42,25 @@
 						${errmsg}
 					</div>
 				</c:when>
-					<c:when test="${not empty success}">
-						<div class="alert alert-success">
-							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							${success}
-						</div>
-					</c:when>
+				<c:when test="${not empty success}">
+					<div class="alert alert-success">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						${success}
+					</div>
+				</c:when>
 				<c:otherwise>
-					<br> <br>
+					<br>
+					<br>
 				</c:otherwise>
 			</c:choose>
 			<form method="post" action="controller">
 				<input type="hidden" name="command" value="block-account-command">
-				<span>${dictionary["ACCOUNT_TO_BLOCK"]}</span> <input type="text"
-					name="block"> <br>
+				<div class="row">
+					<div class="col-sm-5">
+						<span>${dictionary["ACCOUNT_TO_BLOCK"]}</span>
+					</div>
+					<input type="text" name="block">
+				</div>
 				<br>
 				<button class="btn btn-primary">${dictionary["BLOCK_ACCOUNT"]}</button>
 			</form>

@@ -31,6 +31,5 @@
 	<div class="wrapper">
 		<img class="img-responsive" src="Perm'.jpg" alt="Chania">
 	</div>
-	<footer> ${dictionary["CONTACT_INFO"]} </footer>
 </body>
 </html>
